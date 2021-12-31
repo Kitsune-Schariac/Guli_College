@@ -49,6 +49,8 @@ public class EduTeacherController {
     }*/
 
 
+    /*int i = 10/0;*/
+
     //查询所有数据
     @ApiOperation(value = "查询所有的讲师")
     @GetMapping("/find")
@@ -133,6 +135,41 @@ public class EduTeacherController {
         long total = teacherPage.getTotal();//总记录数
         List<EduTeacher> list = teacherPage.getRecords();//数据list集合
         return R.ok().data("total", total).data("rows", list);
+    }
+
+    //添加讲师
+    @ApiOperation(value = "添加讲师")
+    @PostMapping("/addTeacher")
+    public R addTeacher(@RequestBody EduTeacher eduTeacher) {
+        boolean save = eduTeacherService.save(eduTeacher);
+        if(save){
+            return R.ok();
+        }
+        else {
+            return R.error();
+        }
+    }
+
+    //获取某个讲师
+    @ApiOperation(value = "根据id查询讲师")
+    @PostMapping("/getTeacher/{id}")
+    public R getTeacher(@PathVariable String id) {
+        EduTeacher eduTeacher = eduTeacherService.getById(id);
+        return R.ok().data("teacher", eduTeacher);
+
+    }
+
+    //修改讲师
+    @ApiOperation(value = "修改讲师")
+    @PostMapping("/updateTeacher")
+    public R updateTeacher(@RequestBody EduTeacher eduTeacher) {
+        boolean flag = eduTeacherService.updateById(eduTeacher);
+        if(flag){
+            return R.ok();
+        }
+        else{
+            return R.error();
+        }
     }
 
 }
