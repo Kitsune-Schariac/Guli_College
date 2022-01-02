@@ -2,12 +2,14 @@ package com.kitsune.servicebase.exceptionhandler;
 
 
 import com.kitsune.commonutils.R;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @ControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)      //出现设么异常执行这个方法
@@ -31,6 +33,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GuliException.class)      //出现设么异常执行这个方法
     @ResponseBody   //为了能够返回数据
     public R error(GuliException e) {
+
+        //把异常输出到日志
+        log.error(e.getMsg());
 
         e.printStackTrace();
         return R.error().code(e.getCode()).message(e.getMsg());

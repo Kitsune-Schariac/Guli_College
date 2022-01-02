@@ -49,7 +49,7 @@ public class EduTeacherController {
     }*/
 
 
-    /*int i = 10/0;*/
+
 
     //查询所有数据
     @ApiOperation(value = "查询所有的讲师")
@@ -57,6 +57,13 @@ public class EduTeacherController {
     public R findTeachers() {
         List<EduTeacher> eduTeachers = eduTeacherService.list(null);
         return R.ok().data("items", eduTeachers);
+
+        /*try {
+            int i = 10/0;
+        }catch(Exception e) {
+            //执行自定义异常
+            throw new GuliException(20001, "执行了自定义异常处理……");
+        }*/
 
     }
 
