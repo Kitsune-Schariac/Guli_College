@@ -6,7 +6,7 @@ import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/eduService/user")
+@RequestMapping("/eduservice/user")
 @Api(tags = "登录")
 @CrossOrigin  //跨域访问
 public class EduLoginController {

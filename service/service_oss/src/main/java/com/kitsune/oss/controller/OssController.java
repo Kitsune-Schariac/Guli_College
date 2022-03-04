@@ -25,7 +25,9 @@ public class OssController {
         String url = ossService.uploadFileAvatar(file);
 
 
-        return R.ok();
+        return R.ok().data("url", url);
+//        这里要把云端图片的url返回给前端，否则前端就没有图像的url，也无法将url再返回到后台数据库
+//        return R.ok();
     }
 
 }
