@@ -2,13 +2,13 @@ package com.kitsune.eduservice.controller;
 
 
 import com.kitsune.commonutils.R;
+import com.kitsune.eduservice.entity.subject.OneSubject;
 import com.kitsune.eduservice.service.EduSubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -36,6 +36,14 @@ public class EduSubjectController {
         eduSubjectService.saveSubject(file, eduSubjectService);
 
         return R.ok();
+    }
+
+    @GetMapping("getAllSubject")
+    public R getAllSubject(){
+
+        List<OneSubject> subject = eduSubjectService.getOneTwoSubject();
+
+        return R.ok().data("list", subject);
     }
 
 
