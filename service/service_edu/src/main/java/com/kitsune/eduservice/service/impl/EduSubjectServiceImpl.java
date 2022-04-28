@@ -92,19 +92,17 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
                 //判断二级分类的parent_id和一级分类的id是否一样
                 if (eduSubject1.getParentId().equals(eduSubject.getId())){
                     //把二级分类封装到最终对象
-                    TwoSubject twoSubject = new TwoSubject();
-                    BeanUtils.copyProperties(eduSubject1, twoSubject);
-                    twoFinalSubjectList.add(twoSubject);
+                    TwoSubject twoSubject = new TwoSubject();//new一个twoSubject用作容器
+                    BeanUtils.copyProperties(eduSubject1, twoSubject);//把eduSubject放进twoSubject
+                    twoFinalSubjectList.add(twoSubject);//把twoSubject放到集合中
 
                 }
             }
-            finalSubjectList.get(i).setChildren(twoFinalSubjectList);
+            finalSubjectList.get(i).setChildren(twoFinalSubjectList);//把二级分类的集合放进finalSubjectList
 
 
         }
 
-
-        //封装二级分类
 
         return finalSubjectList;
     }
