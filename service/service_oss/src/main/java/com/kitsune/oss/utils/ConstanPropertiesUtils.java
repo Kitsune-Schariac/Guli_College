@@ -1,6 +1,7 @@
 package com.kitsune.oss.utils;
 
 
+import com.kitsune.commonutils.Key;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -28,12 +29,14 @@ public class ConstanPropertiesUtils implements InitializingBean {
     public static String ACCESS_KEY_SECRET;
     public static String ACCESS_NAME;
 
+    Key key = new Key();
+
     @Override
     public void afterPropertiesSet() throws Exception {
 
         END_POINT = endpoint;
-        ACCESS_KEY_ID = keyId;
-        ACCESS_KEY_SECRET = keySecret;
+        ACCESS_KEY_ID = key.simpleDecrypt(keyId);
+        ACCESS_KEY_SECRET = key.simpleDecrypt(keySecret);
         ACCESS_NAME = bucketName;
 
     }
