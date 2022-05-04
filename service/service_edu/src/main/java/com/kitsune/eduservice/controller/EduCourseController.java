@@ -29,8 +29,8 @@ public class EduCourseController {
         //返回添加之后课程id， 为了后面添加大纲使用
         // TODO: 2022/4/14
 //        String id = eduCourseService
-        eduCourseService.saveCourseInfo(courseInfoVo);
-        return R.ok();
+        String id = eduCourseService.saveCourseInfo(courseInfoVo);
+        return R.ok().data("courseId", id);
     }
 
 }
