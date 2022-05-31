@@ -2,6 +2,9 @@ package com.kitsune.eduservice.service;
 
 import com.kitsune.eduservice.entity.EduChapter;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.kitsune.eduservice.entity.chapter.ChapterVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-03-08
  */
 public interface EduChapterService extends IService<EduChapter> {
+
+    public List<ChapterVo> getChapterVideoByCourseId(String courseId);
 
 }
