@@ -85,6 +85,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             //修改简介表
             EduCourseDescription eduCourseDescription = new EduCourseDescription();
             eduCourseDescription.setDescription(courseInfoVo.getDescription());
+            eduCourseDescription.setId(courseInfoVo.getId());
             boolean update1 = eduCourseDescriptionService.updateById(eduCourseDescription);
             if(!update1){
                 throw new GuliException(20001, "修改描述信息失败");

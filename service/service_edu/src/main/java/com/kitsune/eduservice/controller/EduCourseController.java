@@ -50,7 +50,7 @@ public class EduCourseController {
 
     //修改课程信息
     @ApiOperation(value = "修改课程信息")
-    @GetMapping("updateCourseInfo")
+    @PostMapping("updateCourseInfo")
     public R updateCourseInfo(@RequestBody CourseInfoVo courseInfoVo){
 
         eduCourseService.updateCourseInfo(courseInfoVo);

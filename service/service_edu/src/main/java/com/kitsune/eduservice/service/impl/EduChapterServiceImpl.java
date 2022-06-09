@@ -10,6 +10,7 @@ import com.kitsune.eduservice.service.EduChapterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kitsune.eduservice.service.EduCourseService;
 import com.kitsune.eduservice.service.EduVideoService;
+import com.kitsune.servicebase.exceptionhandler.GuliException;
 import com.sun.xml.bind.v2.TODO;
 import org.ehcache.Cache;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.WeakHashMap;
 
 /**
  * <p>
@@ -81,5 +83,20 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
 
 
         return finalChapterVo;
+    }
+
+    @Override
+    public boolean deleteChapter(String chapterId) {
+
+        QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
+        wrapper.eq("chapter_id", chapterId);
+        int count = eduVideoService.count(wrapper);
+        if(count < 1) {
+            throw new GuliException(20001, "仍有小节未删除，无法删除章节");
+        }else{
+            int delete = baseMapper.deleteById(chapterId);
+            return delete > 0;
+        }
+
     }
 }
