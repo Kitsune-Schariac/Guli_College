@@ -1,15 +1,22 @@
 package com.kitsune.eduservice.service.impl;
 
+import ch.qos.logback.core.status.StatusUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kitsune.eduservice.entity.EduCourse;
 import com.kitsune.eduservice.entity.EduCourseDescription;
 import com.kitsune.eduservice.entity.vo.CourseInfoVo;
 import com.kitsune.eduservice.entity.vo.CoursePublishVo;
+import com.kitsune.eduservice.entity.vo.CourseQueryVo;
 import com.kitsune.eduservice.mapper.EduCourseDescriptionMapper;
 import com.kitsune.eduservice.mapper.EduCourseMapper;
+import com.kitsune.eduservice.service.EduChapterService;
 import com.kitsune.eduservice.service.EduCourseDescriptionService;
 import com.kitsune.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.kitsune.eduservice.service.EduVideoService;
 import com.kitsune.servicebase.exceptionhandler.GuliException;
+import org.springframework.util.StringUtils;
 import org.apache.tomcat.util.modeler.BaseModelMBean;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +38,10 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     private EduCourseDescriptionService eduCourseDescriptionService;
     @Autowired
     private EduCourseMapper eduCourseMapper;
+    @Autowired
+    private EduVideoService eduVideoService;
+    @Autowired
+    private EduChapterService eduChapterService;
 
     //添加课程基本信息的方法
     @Override
@@ -103,5 +114,61 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     public CoursePublishVo getPublishCourseInfo(String id) {
         CoursePublishVo publishCourseInfo = eduCourseMapper.getPublishCourseInfo(id);
         return publishCourseInfo;
+    }
+
+    @Override
+    public Page<EduCourse> coursePageCondition(long current, long limit, CourseQueryVo courseQueryVo) {
+
+        Page<EduCourse> page = new Page<>(current, limit);
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+
+        //取出条件参数
+        String status = courseQueryVo.getStatus();
+        String subjectId = courseQueryVo.getSubjectId();
+        String subjectParentId = courseQueryVo.getSubjectParentId();
+        String title = courseQueryVo.getTitle();
+        String teacherId = courseQueryVo.getTeacherId();
+
+        //准备判断条件拼接
+        if(!StringUtils.isEmpty(status)){
+            wrapper.like("status", status);
+        }
+        if(!StringUtils.isEmpty(subjectId)){
+            wrapper.like("subject_id", subjectId);
+        }
+        if(!StringUtils.isEmpty(subjectParentId)){
+            wrapper.like("subject_parent_id", subjectParentId);
+        }
+        if(!StringUtils.isEmpty(title)){
+            wrapper.like("title", title);
+        }
+        if(!StringUtils.isEmpty(teacherId)){
+            wrapper.like("teacher_id", teacherId);
+        }
+
+        //调用父类方法实现分页
+        super.page(page, wrapper);
+
+        return page;
+    }
+
+    @Override
+    public void deleteCourse(String id) {
+
+        //删除小节
+        eduVideoService.removeVideoByCourseId(id);
+
+        //删除章节
+        eduChapterService.removeChapterByCourseId(id);
+
+        //删除描述
+        eduCourseDescriptionService.removeById(id);
+
+        //删除课程
+        int res = baseMapper.deleteById(id);
+        if(res == 0){
+            throw new GuliException(20001, "删除失败");
+        }
+
     }
 }

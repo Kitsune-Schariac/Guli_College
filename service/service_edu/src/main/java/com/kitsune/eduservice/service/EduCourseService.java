@@ -1,9 +1,11 @@
 package com.kitsune.eduservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kitsune.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.kitsune.eduservice.entity.vo.CourseInfoVo;
 import com.kitsune.eduservice.entity.vo.CoursePublishVo;
+import com.kitsune.eduservice.entity.vo.CourseQueryVo;
 
 /**
  * <p>
@@ -24,5 +26,11 @@ public interface EduCourseService extends IService<EduCourse> {
     void updateCourseInfo(CourseInfoVo courseInfoVo);
 
     CoursePublishVo getPublishCourseInfo(String id);
+
+    //多条件分页查询
+    Page<EduCourse> coursePageCondition(long current, long limit, CourseQueryVo courseQueryVo);
+
+    //删除课程
+    void deleteCourse(String id);
 
 }

@@ -1,5 +1,6 @@
 package com.kitsune.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.kitsune.eduservice.entity.EduCourseDescription;
 import com.kitsune.eduservice.mapper.EduCourseDescriptionMapper;
 import com.kitsune.eduservice.service.EduCourseDescriptionService;
