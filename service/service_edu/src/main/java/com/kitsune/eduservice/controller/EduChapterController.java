@@ -82,7 +82,7 @@ public class EduChapterController {
     }
 
     //删除章节
-    @DeleteMapping("deleteChapter")
+    @DeleteMapping("deleteChapter/{chapterId}")
     public R deleteChapter(
             @ApiParam(name = "chapterId", value = "id", required = true)
             @PathVariable String chapterId){

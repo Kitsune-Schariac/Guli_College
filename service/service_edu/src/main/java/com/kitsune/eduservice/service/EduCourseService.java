@@ -3,6 +3,7 @@ package com.kitsune.eduservice.service;
 import com.kitsune.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.kitsune.eduservice.entity.vo.CourseInfoVo;
+import com.kitsune.eduservice.entity.vo.CoursePublishVo;
 
 /**
  * <p>
@@ -21,4 +22,7 @@ public interface EduCourseService extends IService<EduCourse> {
     CourseInfoVo getCourseInfo(String courseId);
 
     void updateCourseInfo(CourseInfoVo courseInfoVo);
+
+    CoursePublishVo getPublishCourseInfo(String id);
+
 }

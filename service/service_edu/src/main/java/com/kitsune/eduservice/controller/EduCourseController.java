@@ -4,6 +4,7 @@ package com.kitsune.eduservice.controller;
 import com.kitsune.commonutils.R;
 import com.kitsune.eduservice.entity.EduCourse;
 import com.kitsune.eduservice.entity.vo.CourseInfoVo;
+import com.kitsune.eduservice.entity.vo.CoursePublishVo;
 import com.kitsune.eduservice.service.EduCourseService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -56,6 +57,14 @@ public class EduCourseController {
         eduCourseService.updateCourseInfo(courseInfoVo);
 
         return R.ok();
+    }
+
+    //获取课程最终发布信息
+    @ApiOperation(value = "课程最终发布信息")
+    @GetMapping("getPublishCourse/{id}")
+    public R getPublishCourse(@PathVariable String id){
+        CoursePublishVo publishCourse = eduCourseService.getPublishCourseInfo(id);
+        return R.ok().data("publishCourse", publishCourse);
     }
 
 

@@ -91,7 +91,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
         wrapper.eq("chapter_id", chapterId);
         int count = eduVideoService.count(wrapper);
-        if(count < 1) {
+        if(count > 0) {
             throw new GuliException(20001, "仍有小节未删除，无法删除章节");
         }else{
             int delete = baseMapper.deleteById(chapterId);

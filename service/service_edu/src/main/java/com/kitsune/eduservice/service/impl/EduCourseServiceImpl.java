@@ -3,11 +3,14 @@ package com.kitsune.eduservice.service.impl;
 import com.kitsune.eduservice.entity.EduCourse;
 import com.kitsune.eduservice.entity.EduCourseDescription;
 import com.kitsune.eduservice.entity.vo.CourseInfoVo;
+import com.kitsune.eduservice.entity.vo.CoursePublishVo;
+import com.kitsune.eduservice.mapper.EduCourseDescriptionMapper;
 import com.kitsune.eduservice.mapper.EduCourseMapper;
 import com.kitsune.eduservice.service.EduCourseDescriptionService;
 import com.kitsune.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kitsune.servicebase.exceptionhandler.GuliException;
+import org.apache.tomcat.util.modeler.BaseModelMBean;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +29,8 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     //这里注入description的service是因为在添加课程简介的时候要用到这个service，而在spring管理下的地方我们只需要注入就可以直接使用
     @Autowired
     private EduCourseDescriptionService eduCourseDescriptionService;
+    @Autowired
+    private EduCourseMapper eduCourseMapper;
 
     //添加课程基本信息的方法
     @Override
@@ -92,5 +97,11 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             }
         }
 
+    }
+
+    @Override
+    public CoursePublishVo getPublishCourseInfo(String id) {
+        CoursePublishVo publishCourseInfo = eduCourseMapper.getPublishCourseInfo(id);
+        return publishCourseInfo;
     }
 }
