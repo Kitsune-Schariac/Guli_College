@@ -5,14 +5,11 @@ import com.kitsune.commonutils.R;
 import com.kitsune.eduservice.entity.EduChapter;
 import com.kitsune.eduservice.entity.chapter.ChapterVo;
 import com.kitsune.eduservice.service.EduChapterService;
-import com.kitsune.eduservice.service.EduSubjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sun.nio.ch.DatagramSocketAdaptor;
-import sun.plugin.dom.exception.NoModificationAllowedException;
 
 import java.util.List;
 
