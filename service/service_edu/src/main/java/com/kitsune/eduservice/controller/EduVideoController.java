@@ -2,12 +2,14 @@ package com.kitsune.eduservice.controller;
 
 
 import com.kitsune.commonutils.R;
+import com.kitsune.eduservice.client.VodClient;
 import com.kitsune.eduservice.entity.EduVideo;
 import com.kitsune.eduservice.service.EduVideoService;
 import com.kitsune.servicebase.exceptionhandler.GuliException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -26,6 +28,9 @@ public class EduVideoController {
     @Autowired
     private EduVideoService eduVideoService;
 
+    @Autowired
+    private VodClient vodClient;
+
     //添加小节
     @ApiOperation(value = "添加小节")
     @PostMapping("addVideo")
@@ -40,10 +45,18 @@ public class EduVideoController {
     }
 
     //删除小节
-    // TODO: 2022/6/12 需要在删除小节的时候，同时删除里面的视频
+    // TODO: 2022/6/27 需要将这个方法封装到service
     @ApiOperation(value = "删除小节")
     @DeleteMapping("deleteVideo/{id}")
     public R deleteVideo(@PathVariable String id){
+        //根据小节id查询到视频的id，然后删除视频
+        EduVideo video = eduVideoService.getById(id);
+        String sourceId = video.getVideoSourceId();
+        //当视频id存在，就删除这个视频
+        if(!StringUtils.isEmpty(sourceId)){
+            vodClient.removeAliyunVideo(sourceId);
+        }
+
         boolean remove = eduVideoService.removeById(id);
         if(remove){
             return R.ok();
