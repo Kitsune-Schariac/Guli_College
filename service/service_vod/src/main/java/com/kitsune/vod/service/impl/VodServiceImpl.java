@@ -10,11 +10,13 @@ import com.kitsune.servicebase.exceptionhandler.GuliException;
 import com.kitsune.vod.Utils.ConstantVodUtils;
 import com.kitsune.vod.Utils.InitVodClient;
 import com.kitsune.vod.service.VodService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 @Service
 public class VodServiceImpl implements VodService {
@@ -89,6 +91,27 @@ public class VodServiceImpl implements VodService {
             DeleteVideoRequest request = new DeleteVideoRequest();
             //向request设置视频id
             request.setVideoIds(id);
+            client.getAcsResponse(request);
+        } catch (ClientException e) {
+            e.printStackTrace();
+            throw new GuliException(20001, "删除视频失败");
+        }
+    }
+
+    @Override
+    public void removeMoreAliyunVideo(List videoIdList) {
+        try {
+            //初始化对象
+            DefaultAcsClient client = InitVodClient.initVodClient(ConstantVodUtils.ACCESS_KEY_ID, ConstantVodUtils.ACCESS_KEY_SECRET);
+            //创建Ali 删除视频request对象
+            DeleteVideoRequest request = new DeleteVideoRequest();
+
+            //videoIdList值转换成1， 2， 3
+            String videoIds = StringUtils.join(videoIdList.toArray(), ",");
+
+            //向request设置视频id
+            request.setVideoIds(videoIds);
+
             client.getAcsResponse(request);
         } catch (ClientException e) {
             e.printStackTrace();

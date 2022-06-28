@@ -115,7 +115,7 @@ public class EduCourseController {
     }
 
     //删除课程
-    @ApiOperation(value = "删除课程信息")
+    @ApiOperation(value = "删除课程信息(已停用)")
     @DeleteMapping("deleteByIdLogic/{id}")
     public R deleteLogic(@ApiParam(name = "id", value = "id", required = true)
                          @PathVariable String id){

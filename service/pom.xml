@@ -27,23 +27,18 @@
 
 
 
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
         </dependency>
 
-        &lt;!&ndash;hystrix依赖，主要是用  @HystrixCommand &ndash;&gt;
+        <!--hystrix依赖，主要是用  @HystrixCommand -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
 
 
-        &lt;!&ndash;服务调用&ndash;&gt;
-         <dependency>
-             <groupId>org.springframework.cloud</groupId>
-             <artifactId>spring-cloud-starter-openfeign</artifactId>
-         </dependency>-->
 <!--        &lt;!&ndash;服务注册&ndash;&gt;-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
