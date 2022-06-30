@@ -1,9 +1,10 @@
-package com.atguigu.vodtest;
-import com.aliyuncs.profile.DefaultProfile;
+package com.kitsune.vod.utils;
+
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.profile.DefaultProfile;
 
-public class InitObject {
+public class InitVodClient {
 
     //填入AccessKey信息
     public static DefaultAcsClient initVodClient(String accessKeyId, String accessKeySecret) throws ClientException {

@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>service_base</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>io.springfox</groupId>
@@ -29,5 +29,22 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <classifier>execute</classifier>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

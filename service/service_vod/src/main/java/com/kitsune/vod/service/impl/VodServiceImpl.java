@@ -7,8 +7,8 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
 import com.kitsune.servicebase.exceptionhandler.GuliException;
-import com.kitsune.vod.Utils.ConstantVodUtils;
-import com.kitsune.vod.Utils.InitVodClient;
+import com.kitsune.vod.utils.ConstantVodUtils;
+import com.kitsune.vod.utils.InitVodClient;
 import com.kitsune.vod.service.VodService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
@@ -18,15 +18,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import static com.kitsune.vod.utils.ConstantVodUtils.*;
+
 @Service
 public class VodServiceImpl implements VodService {
 
     private String accessKeyId = ConstantVodUtils.ACCESS_KEY_ID;
     private String accessKeySecret = ConstantVodUtils.ACCESS_KEY_SECRET;
 
+//    private String accessKeyId = ACCESS_KEY_ID;
+//    private String accessKeySecret = ACCESS_KEY_SECRET;
+
     @Override
     public String uploadVideoAly(MultipartFile file) {
         try {
+//            System.out.println(TEST);
+//            System.out.println(TEST2);
+//            System.out.println(this.accessKeyId);
+//            System.out.println(this.accessKeySecret);
             //accessKeyId, accessKeySecret
             //fileName: 上传文件原始名称
             String fileName = file.getOriginalFilename();
@@ -35,7 +44,7 @@ public class VodServiceImpl implements VodService {
 
             //inputStream ：上传文件输入流
             InputStream inputStream = file.getInputStream();
-            UploadStreamRequest request = new UploadStreamRequest(accessKeyId, accessKeySecret, title, fileName, inputStream);
+            UploadStreamRequest request = new UploadStreamRequest(ConstantVodUtils.ACCESS_KEY_ID, ConstantVodUtils.ACCESS_KEY_SECRET, title, fileName, inputStream);
             /* 是否使用默认水印(可选)，指定模板组ID时，根据模板组配置确定是否使用默认水印*/
             //request.setShowWaterMark(true);
             /* 设置上传完成后的回调URL(可选)，建议通过点播控制台配置消息监听事件，参见文档 https://help.aliyun.com/document_detail/57029.html */
@@ -74,6 +83,9 @@ public class VodServiceImpl implements VodService {
                 videoId = response.getVideoId();
             } else { //如果设置回调URL无效，不影响视频上传，可以返回VideoId同时会返回错误码。其他情况上传失败时，VideoId为空，此时需要根据返回错误码分析具体错误原因
                 videoId = response.getVideoId();
+                String message = response.getMessage();
+                String code = response.getCode();
+                throw new GuliException(20001, "上传失败 message: " + message + "code: " + code);
             }
             return videoId;
         } catch (IOException e) {

@@ -8,10 +8,12 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>service</module>
-        <module>service/service_edu</module>
+<!--        <module>service/service_edu</module>-->
+<!--        <module>service/service_oss</module>-->
+<!--        <module>service/service_vod</module>-->
         <module>common</module>
-        <module>common/service_base</module>
-        <module>common/common_utils</module>
+<!--        <module>common/service_base</module>-->
+<!--        <module>common/common_utils</module>-->
     </modules>
     <name>guli_parent</name>
     <description>guli_parent</description>

@@ -15,6 +15,7 @@
     </properties>
 
     <artifactId>service_edu</artifactId>
+    <packaging>jar</packaging>
     <dependencies>
 
         <dependency>
@@ -23,24 +24,24 @@
             <version>2.1.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-annotation</artifactId>
-            <version>3.0.5</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.0.5</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>mybatis-plus-annotation</artifactId>-->
+<!--            <version>3.0.5</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.0.5</version>
             <scope>test</scope>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>mybatis-plus-generator</artifactId>-->
+<!--            <version>3.0.5</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -118,7 +119,18 @@
 
     </dependencies>
 
+    <!-- 项目打包时会将java目录中的*.xml文件也进行打包 -->
     <build>
+        <plugins>
+            <plugin>
+                <!--该插件主要用途：构建可执行的JAR -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.kitsune.eduservice.EduApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
         <resources>
             <resource>
                 <!-- xml放在java目录下-->
@@ -129,12 +141,13 @@
                 </includes>
                 <filtering>false</filtering>
             </resource>
+            <!--设置自己目录下的配置文件-->
             <resource>
+                <!--下方resources的文件夹名字要和自己项目的文件夹名确认一致才行 很多人就是忽略了名字不一致 -->
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.*</include>
                 </includes>
-                <filtering>false</filtering>
             </resource>
         </resources>
     </build>
