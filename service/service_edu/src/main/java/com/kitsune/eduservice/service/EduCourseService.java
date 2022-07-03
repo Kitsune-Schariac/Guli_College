@@ -7,6 +7,8 @@ import com.kitsune.eduservice.entity.vo.CourseInfoVo;
 import com.kitsune.eduservice.entity.vo.CoursePublishVo;
 import com.kitsune.eduservice.entity.vo.CourseQueryVo;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程 服务类
@@ -32,5 +34,8 @@ public interface EduCourseService extends IService<EduCourse> {
 
     //删除课程
     void deleteCourse(String id);
+
+    //获取前n个热门课程
+    List<EduCourse> courseLimit();
 
 }

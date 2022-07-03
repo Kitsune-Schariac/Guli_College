@@ -22,6 +22,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程 服务实现类
@@ -170,5 +172,16 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             throw new GuliException(20001, "删除失败");
         }
 
+    }
+
+    @Override
+    public List<EduCourse> courseLimit() {
+
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("id");
+        wrapper.last("limit 8");
+        List<EduCourse> list = baseMapper.selectList(wrapper);
+
+        return list;
     }
 }

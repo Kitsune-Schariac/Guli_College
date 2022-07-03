@@ -12,7 +12,8 @@
 <!--        <module>service/service_oss</module>-->
 <!--        <module>service/service_vod</module>-->
         <module>common</module>
-<!--        <module>common/service_base</module>-->
+        <module>service_acl</module>
+        <!--        <module>common/service_base</module>-->
 <!--        <module>common/common_utils</module>-->
     </modules>
     <name>guli_parent</name>
