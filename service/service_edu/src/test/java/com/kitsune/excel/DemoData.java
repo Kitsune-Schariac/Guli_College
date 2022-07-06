@@ -1,4 +1,4 @@
-package com.kitsune.demo.excel;
+package com.kitsune.excel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;

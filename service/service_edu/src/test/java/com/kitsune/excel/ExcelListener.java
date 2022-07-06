@@ -1,4 +1,4 @@
-package com.kitsune.demo.excel;
+package com.kitsune.excel;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;

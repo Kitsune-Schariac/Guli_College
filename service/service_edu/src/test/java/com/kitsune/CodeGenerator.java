@@ -1,4 +1,4 @@
-package com.kitsune.demo;
+package com.kitsune;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
