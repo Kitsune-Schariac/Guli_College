@@ -2,6 +2,7 @@ package com.kitsune.educenter.service;
 
 import com.kitsune.educenter.entity.UcenterMember;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.kitsune.educenter.entity.vo.MemberInfo;
 import com.kitsune.educenter.entity.vo.RegisterVo;
 
 /**
@@ -19,5 +20,8 @@ public interface UcenterMemberService extends IService<UcenterMember> {
 
     //注册的方法
     boolean register(RegisterVo registerVo);
+
+    //根据id获取用户信息
+    MemberInfo getInfo(String id);
 
 }

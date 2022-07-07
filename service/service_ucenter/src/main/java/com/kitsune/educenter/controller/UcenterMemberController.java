@@ -1,13 +1,18 @@
 package com.kitsune.educenter.controller;
 
 
+import com.kitsune.commonutils.JwtUtils;
 import com.kitsune.commonutils.R;
 import com.kitsune.educenter.entity.UcenterMember;
+import com.kitsune.educenter.entity.vo.MemberInfo;
 import com.kitsune.educenter.entity.vo.RegisterVo;
 import com.kitsune.educenter.service.UcenterMemberService;
+import com.kitsune.servicebase.exceptionhandler.GuliException;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -43,6 +48,20 @@ public class UcenterMemberController {
             return R.error().message("注册失败");
         }
         return R.ok();
+    }
+
+    //根据token获取用户信息
+    @ApiOperation(value = "根据token获取用户信息")
+    @GetMapping("auth/getLoginInfo")
+    public R getLoginInfo(HttpServletRequest request) {
+        try {
+            String memberId = JwtUtils.getMemberIdByJwtToken(request);
+            MemberInfo loginInfo = ucenterMemberService.getInfo(memberId);
+            return R.ok().data("info", loginInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new GuliException(20001, "error");
+        }
     }
 
 

@@ -4,13 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.kitsune.commonutils.JwtUtils;
 import com.kitsune.commonutils.MD5;
 import com.kitsune.educenter.entity.UcenterMember;
+import com.kitsune.educenter.entity.vo.MemberInfo;
 import com.kitsune.educenter.entity.vo.RegisterVo;
 import com.kitsune.educenter.mapper.UcenterMemberMapper;
 import com.kitsune.educenter.service.UcenterMemberService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kitsune.servicebase.exceptionhandler.GuliException;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -100,5 +103,18 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         baseMapper.insert(member);
 
         return true;
+    }
+
+    //获取首页的用户信息
+    @Override
+    public MemberInfo getInfo(String id) {
+
+        QueryWrapper<UcenterMember> wrapper = new QueryWrapper<>();
+        wrapper.eq("id", id);
+        UcenterMember member = baseMapper.selectOne(wrapper);
+        MemberInfo memberInfo = new MemberInfo();
+        BeanUtils.copyProperties(member, memberInfo);
+
+        return memberInfo;
     }
 }
