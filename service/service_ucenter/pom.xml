@@ -16,4 +16,22 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+<!--    <dependencies>-->
+<!--        &lt;!&ndash;httpclient&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.httpcomponents</groupId>-->
+<!--            <artifactId>httpclient</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash;commons-io&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>commons-io</groupId>-->
+<!--            <artifactId>commons-io</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash;gson&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.code.gson</groupId>-->
+<!--            <artifactId>gson</artifactId>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
+
 </project>

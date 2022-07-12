@@ -24,4 +24,7 @@ public interface UcenterMemberService extends IService<UcenterMember> {
     //根据id获取用户信息
     MemberInfo getInfo(String id);
 
+    //根据openid查询用户信息
+    UcenterMember getOpenIdMember(String openid);
+
 }

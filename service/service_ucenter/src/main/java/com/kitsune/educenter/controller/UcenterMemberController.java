@@ -54,9 +54,13 @@ public class UcenterMemberController {
     @ApiOperation(value = "根据token获取用户信息")
     @GetMapping("auth/getLoginInfo")
     public R getLoginInfo(HttpServletRequest request) {
+
         try {
             String memberId = JwtUtils.getMemberIdByJwtToken(request);
-            MemberInfo loginInfo = ucenterMemberService.getInfo(memberId);
+            MemberInfo loginInfo = new MemberInfo();
+            if(memberId != null && memberId != ""){
+                loginInfo = ucenterMemberService.getInfo(memberId);
+            }
             return R.ok().data("info", loginInfo);
         } catch (Exception e) {
             e.printStackTrace();
