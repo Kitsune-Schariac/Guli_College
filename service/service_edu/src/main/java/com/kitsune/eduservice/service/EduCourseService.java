@@ -3,11 +3,13 @@ package com.kitsune.eduservice.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kitsune.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.kitsune.eduservice.entity.frontVo.CourseFrontVo;
 import com.kitsune.eduservice.entity.vo.CourseInfoVo;
 import com.kitsune.eduservice.entity.vo.CoursePublishVo;
 import com.kitsune.eduservice.entity.vo.CourseQueryVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -37,5 +39,8 @@ public interface EduCourseService extends IService<EduCourse> {
 
     //获取前n个热门课程
     List<EduCourse> courseLimit();
+
+    //条件查询带分页查询课程
+    Map<String, Object> getCourseFrontList(Page<EduCourse> pageCourse, CourseFrontVo courseFrontVo);
 
 }

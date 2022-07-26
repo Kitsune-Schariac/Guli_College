@@ -2,9 +2,12 @@ package com.kitsune.eduservice.service.impl;
 
 import ch.qos.logback.core.status.StatusUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kitsune.eduservice.entity.EduCourse;
 import com.kitsune.eduservice.entity.EduCourseDescription;
+import com.kitsune.eduservice.entity.EduTeacher;
+import com.kitsune.eduservice.entity.frontVo.CourseFrontVo;
 import com.kitsune.eduservice.entity.vo.CourseInfoVo;
 import com.kitsune.eduservice.entity.vo.CoursePublishVo;
 import com.kitsune.eduservice.entity.vo.CourseQueryVo;
@@ -22,7 +25,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -184,4 +189,60 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
         return list;
     }
+
+    //条件查询带分页查询课程
+    @Override
+    public Map<String, Object> getCourseFrontList(Page<EduCourse> pageCourse, CourseFrontVo courseFrontVo) {
+
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        //判断条件是否为空 不为空就拼接
+        if(!StringUtils.isEmpty(courseFrontVo.getSubjectParentId())) { //一级分类
+            wrapper.eq("subject_parent_id", courseFrontVo.getSubjectParentId());
+        }
+        if(!StringUtils.isEmpty(courseFrontVo.getSubjectId())) { //二级分类
+            wrapper.eq("subject_id", courseFrontVo.getSubjectId());
+        }
+        // TODO: 2022/7/20 将后面三个排序条件增加升序
+        if(!StringUtils.isEmpty(courseFrontVo.getBuyCountSort())) { //关注度
+            wrapper.orderByDesc("buy_count", courseFrontVo.getBuyCountSort());
+        }
+        if(!StringUtils.isEmpty(courseFrontVo.getGmtCreateSort())) { //最新创建
+            wrapper.orderByDesc("gmt_create", courseFrontVo.getGmtCreateSort());
+        }
+        if(!StringUtils.isEmpty(courseFrontVo.getPriceSort())) { //价格
+            wrapper.orderByDesc("price", courseFrontVo.getPriceSort());
+        }
+
+        baseMapper.selectPage(pageCourse, wrapper);
+
+
+        List<EduCourse> records = pageCourse.getRecords();
+        long total = pageCourse.getTotal();
+        long current = pageCourse.getCurrent();
+        long size = pageCourse.getSize();
+        long pages = pageCourse.getPages();
+        boolean hasNext = pageCourse.hasNext();
+        boolean hasPrevious = pageCourse.hasPrevious();
+
+
+        //把分页数据取出来，放到map集合
+        Map<String, Object> map = new HashMap<>();
+        map.put("total", total);
+        map.put("current", current);
+        map.put("size", size);
+        map.put("pages", pages);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+        map.put("records", records);
+
+        return map;
+    }
 }
+
+
+
+
+
+
+
+

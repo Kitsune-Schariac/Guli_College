@@ -1,9 +1,11 @@
 package com.kitsune.eduservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kitsune.eduservice.entity.EduTeacher;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -17,5 +19,7 @@ public interface EduTeacherService extends IService<EduTeacher> {
 
     //前四个讲师信息
     List<EduTeacher> teacherLimit();
+
+    Map<String, Object> getTeacherFrontList(Page<EduTeacher> pageTeacher);
 
 }
