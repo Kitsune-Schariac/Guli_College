@@ -204,13 +204,19 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         }
         // TODO: 2022/7/20 将后面三个排序条件增加升序
         if(!StringUtils.isEmpty(courseFrontVo.getBuyCountSort())) { //关注度
-            wrapper.orderByDesc("buy_count", courseFrontVo.getBuyCountSort());
+//            wrapper.orderByDesc("buy_count", courseFrontVo.getBuyCountSort());
+            wrapper.orderByDesc("buy_count");
+
         }
         if(!StringUtils.isEmpty(courseFrontVo.getGmtCreateSort())) { //最新创建
-            wrapper.orderByDesc("gmt_create", courseFrontVo.getGmtCreateSort());
+//            wrapper.orderByDesc("gmt_create", courseFrontVo.getGmtCreateSort());
+            wrapper.orderByDesc("gmt_create");
+
         }
         if(!StringUtils.isEmpty(courseFrontVo.getPriceSort())) { //价格
-            wrapper.orderByDesc("price", courseFrontVo.getPriceSort());
+//            wrapper.orderByDesc("price", courseFrontVo.getPriceSort());
+            wrapper.orderByDesc("price");
+
         }
 
         baseMapper.selectPage(pageCourse, wrapper);
