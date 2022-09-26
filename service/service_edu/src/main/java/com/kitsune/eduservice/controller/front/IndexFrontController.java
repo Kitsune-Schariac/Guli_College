@@ -23,7 +23,7 @@ import java.util.List;
 @Api(tags = "首页的课程和名师信息")
 @RestController
 @RequestMapping("/eduservice/indexfront")
-@CrossOrigin
+//@CrossOrigin
 public class IndexFrontController {
 
     @Autowired

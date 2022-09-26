@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Api(tags = "讲师前端接口")
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("eduservice/teacherfront")
 public class TeacherFrontController {
 

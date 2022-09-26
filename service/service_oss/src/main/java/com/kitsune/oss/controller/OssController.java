@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Api(tags = "oss服务")
 @RestController
 @RequestMapping("/eduoss/fileoss")
-@CrossOrigin
+//@CrossOrigin
 public class OssController {
 
     @Autowired

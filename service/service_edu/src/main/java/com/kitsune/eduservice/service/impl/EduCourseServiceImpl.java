@@ -8,6 +8,7 @@ import com.kitsune.eduservice.entity.EduCourse;
 import com.kitsune.eduservice.entity.EduCourseDescription;
 import com.kitsune.eduservice.entity.EduTeacher;
 import com.kitsune.eduservice.entity.frontVo.CourseFrontVo;
+import com.kitsune.eduservice.entity.frontVo.CourseWebVo;
 import com.kitsune.eduservice.entity.vo.CourseInfoVo;
 import com.kitsune.eduservice.entity.vo.CoursePublishVo;
 import com.kitsune.eduservice.entity.vo.CourseQueryVo;
@@ -242,6 +243,12 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         map.put("records", records);
 
         return map;
+    }
+
+    //根据课程id获取详情信息
+    @Override
+    public CourseWebVo getBaseCourseInfo(String id) {
+        return baseMapper.getBaseCourseInfo(id);
     }
 }
 

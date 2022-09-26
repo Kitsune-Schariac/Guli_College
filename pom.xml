@@ -12,7 +12,8 @@
 <!--        <module>service/service_oss</module>-->
 <!--        <module>service/service_vod</module>-->
         <module>common</module>
-<!--        <module>service_acl</module>-->
+        <module>infrastructrue</module>
+        <!--        <module>service_acl</module>-->
         <!--        <module>common/service_base</module>-->
 <!--        <module>common/common_utils</module>-->
     </modules>
@@ -208,6 +209,24 @@
                 <groupId>com.alibaba.otter</groupId>
                 <artifactId>canal.client</artifactId>
                 <version>${canal.client.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-core</artifactId>
+                <version>5.1.10.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>5.1.10.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>5.1.10.RELEASE</version>
             </dependency>
 
             <dependency>

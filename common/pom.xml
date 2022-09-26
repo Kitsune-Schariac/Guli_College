@@ -15,6 +15,8 @@
     <modules>
         <module>common_utils</module>
         <module>service_base</module>
+        <module>spring_security</module>
+<!--        <module>api_gateway</module>-->
     </modules>
 
 

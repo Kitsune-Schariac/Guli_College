@@ -3,12 +3,14 @@ package com.kitsune.educenter.controller;
 
 import com.kitsune.commonutils.JwtUtils;
 import com.kitsune.commonutils.R;
+import com.kitsune.commonutils.ordervo.UcenterMemberOrder;
 import com.kitsune.educenter.entity.UcenterMember;
 import com.kitsune.educenter.entity.vo.MemberInfo;
 import com.kitsune.educenter.entity.vo.RegisterVo;
 import com.kitsune.educenter.service.UcenterMemberService;
 import com.kitsune.servicebase.exceptionhandler.GuliException;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/educenter/member")
-@CrossOrigin
+//@CrossOrigin
 public class UcenterMemberController {
 
     @Autowired
@@ -66,6 +68,19 @@ public class UcenterMemberController {
             e.printStackTrace();
             throw new GuliException(20001, "error");
         }
+    }
+
+    @ApiOperation(value = "根据用户id获取用户信息")
+    @PostMapping("getUserInfoOrder/{id}")
+    public UcenterMemberOrder getUserInfoOrder(@PathVariable String id){
+
+        UcenterMember member = ucenterMemberService.getById(id);
+        //把member的值给ucenterMemberOrder
+        UcenterMemberOrder ucenterMemberOrder = new UcenterMemberOrder();
+        BeanUtils.copyProperties(member, ucenterMemberOrder);
+
+        return ucenterMemberOrder;
+
     }
 
 
