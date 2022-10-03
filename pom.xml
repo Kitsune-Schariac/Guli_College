@@ -13,6 +13,7 @@
 <!--        <module>service/service_vod</module>-->
         <module>common</module>
         <module>infrastructrue</module>
+        <module>canal_clientedu</module>
         <!--        <module>service_acl</module>-->
         <!--        <module>common/service_base</module>-->
 <!--        <module>common/common_utils</module>-->
